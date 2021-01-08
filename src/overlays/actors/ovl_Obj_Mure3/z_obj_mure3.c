@@ -31,7 +31,12 @@ const ActorInit Obj_Mure3_InitVars = {
 
 s32 D_80B9B0C0[] = { 0x00050005, 0x00070000 };
 
-s32 D_80B9B0C8[] = { 0xB0F40064, 0xB0F80708, 0x30FC0064 };
+// sInitChain
+InitChainEntry D_80B9B0C8[] = {
+    ICHAIN_F32(uncullZoneForward, 100, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneScale, 1800, ICHAIN_CONTINUE),
+    ICHAIN_F32(uncullZoneDownward, 100, ICHAIN_STOP),
+};
 
 ObjMure3ActionFunc D_80B9B0D4[] = { func_80B9A9D0, func_80B9AA90, func_80B9ABA0 };
 
@@ -45,7 +50,14 @@ ObjMure3ActionFunc D_80B9B0D4[] = { func_80B9A9D0, func_80B9AA90, func_80B9ABA0 
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9ADCC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/ObjMure3_Init.s")
+void ObjMure3_Init(Actor *thisx, GlobalContext *globalCtx) {
+    if (Flags_GetSwitch(globalCtx, thisx->params & 0x3F) != 0) {
+        Actor_Kill(thisx);
+        return;
+    }
+    Actor_ProcessInitChain(thisx, D_80B9B0C8);
+    func_80B9AF24(thisx);
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/ObjMure3_Destroy.s")
 
