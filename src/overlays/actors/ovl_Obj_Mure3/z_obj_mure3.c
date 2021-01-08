@@ -20,6 +20,7 @@ void func_80B9AF24(Actor* thisx);
 void func_80B9AF34(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9AF54(ObjMure3* this);
 void func_80B9AF64(ObjMure3* this, GlobalContext* globalCtx);
+void func_80B9AFEC(ObjMure3* this);
 
 const ActorInit Obj_Mure3_InitVars = {
     ACTOR_OBJ_MURE3,
@@ -80,7 +81,13 @@ void func_80B9AF54(ObjMure3 *this) {
     this->actionFunc = func_80B9AF64;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AF64.s")
+void func_80B9AF64(ObjMure3 *this, GlobalContext *globalCtx) {
+    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) < 1322500.0f) {
+        this->actor.flags = this->actor.flags | 0x10;
+        D_80B9B0D4[(this->actor.params >> 13) & 7](this, globalCtx);
+        func_80B9AFEC(this);
+    }
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AFEC.s")
 
