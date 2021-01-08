@@ -11,7 +11,9 @@ typedef void (*ObjMure3ActionFunc)(struct ObjMure3*, GlobalContext*);
 typedef struct ObjMure3 {
     /* 0x0000 */ Actor actor;
     /* 0x014C */ ObjMure3ActionFunc actionFunc;
-    /* 0x0150 */ char unk_150[0x20];
+    /* 0x0150 */ EnItem00* unk_150[7];
+    /* 0x016C */ s16 unk_16C;
+    /* 0x016E */ char unk_16E[0x2];
 } ObjMure3; // size = 0x0170
 
 extern const ActorInit Obj_Mure3_InitVars;
