@@ -6,6 +6,8 @@
 
 struct ObjMure3;
 
+typedef void (*ObjMure3ActionFunc)(struct ObjMure3*, GlobalContext*);
+
 typedef struct ObjMure3 {
     /* 0x0000 */ Actor actor;
     /* 0x014C */ char unk_14C[0x24];

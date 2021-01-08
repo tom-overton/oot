@@ -3422,7 +3422,6 @@ endseg
 beginseg
     name "ovl_Obj_Mure3"
     include "build/src/overlays/actors/ovl_Obj_Mure3/z_obj_mure3.o"
-    include "build/data/overlays/actors/z_obj_mure3.data.o"
     include "build/data/overlays/actors/z_obj_mure3.reloc.o"
 endseg
 
