@@ -17,7 +17,7 @@ void func_80B9A9D0(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9AA90(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9ABA0(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9AF24(Actor* thisx);
-void func_80B9AF34(ObjMure3 *this, GlobalContext* globalCtx);
+void func_80B9AF34(ObjMure3* this, GlobalContext* globalCtx);
 
 const ActorInit Obj_Mure3_InitVars = {
     ACTOR_OBJ_MURE3,
@@ -52,7 +52,7 @@ ObjMure3ActionFunc D_80B9B0D4[] = { func_80B9A9D0, func_80B9AA90, func_80B9ABA0 
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9ADCC.s")
 
-void ObjMure3_Init(Actor *thisx, GlobalContext *globalCtx) {
+void ObjMure3_Init(Actor* thisx, GlobalContext* globalCtx) {
     if (Flags_GetSwitch(globalCtx, thisx->params & 0x3F) != 0) {
         Actor_Kill(thisx);
         return;
@@ -61,13 +61,11 @@ void ObjMure3_Init(Actor *thisx, GlobalContext *globalCtx) {
     func_80B9AF24(thisx);
 }
 
-void ObjMure3_Destroy(Actor *thisx, GlobalContext *globalCtx) {
-
+void ObjMure3_Destroy(Actor* thisx, GlobalContext* globalCtx) {
 }
 
-
-void func_80B9AF24(Actor *thisx) {
-    ObjMure3 *this = THIS;
+void func_80B9AF24(Actor* thisx) {
+    ObjMure3* this = THIS;
 
     this->actionFunc = func_80B9AF34;
 }
@@ -82,4 +80,8 @@ void func_80B9AF24(Actor *thisx) {
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AFFC.s")
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/ObjMure3_Update.s")
+void ObjMure3_Update(Actor* thisx, GlobalContext* globalCtx) {
+    ObjMure3* this = THIS;
+
+    this->actionFunc(this, globalCtx);
+}
