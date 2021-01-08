@@ -46,27 +46,21 @@ InitChainEntry D_80B9B0C8[] = {
 
 ObjMure3ActionFunc D_80B9B0D4[] = { func_80B9A9D0, func_80B9AA90, func_80B9ABA0 };
 
-#if NON_MATCHING
 void func_80B9A9D0(ObjMure3 *this, GlobalContext *globalCtx) {
     s32 i;
     Vec3f spawnPos;
-    EnItem00 *collectible;
  
     Math_Vec3f_Copy(&spawnPos, &this->actor.posRot.pos);
     for (i = 0; i < 5; i++) {
         if (((this->unk_16C >> i) & 1) == 0) {
-            collectible = Item_DropCollectible2(globalCtx, &spawnPos, 0x4001);
-            this->unk_150[i] = collectible;
-            if (collectible != 0) {
-                collectible->actor.room = this->actor.room;
+            this->unk_150[i] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4001);
+            if (this->unk_150[i] != 0) {
+                this->unk_150[i]->actor.room = this->actor.room;
             }
         }
         spawnPos.y += 20.0f;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9A9D0.s")
-#endif
 
 void func_80B9AA90(ObjMure3 *this, GlobalContext *globalCtx) {
     s32 i;
