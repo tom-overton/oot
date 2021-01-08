@@ -61,7 +61,10 @@ void ObjMure3_Init(Actor *thisx, GlobalContext *globalCtx) {
     func_80B9AF24(thisx);
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/ObjMure3_Destroy.s")
+void ObjMure3_Destroy(Actor *thisx, GlobalContext *globalCtx) {
+
+}
+
 
 void func_80B9AF24(Actor *thisx) {
     ObjMure3 *this = THIS;
