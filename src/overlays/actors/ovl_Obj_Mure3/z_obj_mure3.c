@@ -94,7 +94,14 @@ void func_80B9AFEC(ObjMure3 *this) {
     this->actionFunc = func_80B9AFFC;
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AFFC.s")
+void func_80B9AFFC(ObjMure3 *this, GlobalContext *globalCtx) {
+    func_80B9ADCC();
+    if (Math3D_Dist1DSq(this->actor.projectedPos.x, this->actor.projectedPos.z) >= 2102500.0f) {
+        this->actor.flags = this->actor.flags & ~0x10;
+        func_80B9ACE4(this, globalCtx);
+        func_80B9AF54(this);
+    }
+}
 
 void ObjMure3_Update(Actor* thisx, GlobalContext* globalCtx) {
     ObjMure3* this = THIS;
