@@ -21,6 +21,7 @@ void func_80B9AF34(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9AF54(ObjMure3* this);
 void func_80B9AF64(ObjMure3* this, GlobalContext* globalCtx);
 void func_80B9AFEC(ObjMure3* this);
+void func_80B9AFFC(ObjMure3* this, GlobalContext* globalCtx);
 
 const ActorInit Obj_Mure3_InitVars = {
     ACTOR_OBJ_MURE3,
@@ -89,7 +90,9 @@ void func_80B9AF64(ObjMure3 *this, GlobalContext *globalCtx) {
     }
 }
 
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AFEC.s")
+void func_80B9AFEC(ObjMure3 *this) {
+    this->actionFunc = func_80B9AFFC;
+}
 
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AFFC.s")
 
