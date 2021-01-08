@@ -68,14 +68,12 @@ void func_80B9A9D0(ObjMure3 *this, GlobalContext *globalCtx) {
 #pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9A9D0.s")
 #endif
 
-#if NON_MATCHING
 void func_80B9AA90(ObjMure3 *this, GlobalContext *globalCtx) {
-    EnItem00 *collectible;
+    s32 i;
+    Vec3f spawnPos;
     f32 sn;
     f32 cos;
-    Vec3f spawnPos;
     f32 constant;
-    s32 i;
 
     sn = Math_SinS(this->actor.posRot.rot.y);
     cos = Math_CosS(this->actor.posRot.rot.y);
@@ -85,18 +83,14 @@ void func_80B9AA90(ObjMure3 *this, GlobalContext *globalCtx) {
         if (((this->unk_16C >> i) & 1) == 0) {
             spawnPos.x = this->actor.posRot.pos.x + (sn * constant);
             spawnPos.z = this->actor.posRot.pos.z + (cos * constant);
-            collectible = Item_DropCollectible2(globalCtx, &spawnPos, 0x4000);
-            this->unk_150[i] = collectible;
-            if (collectible != 0) {
-                collectible->actor.room = this->actor.room;
+            this->unk_150[i] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4000);
+            if (this->unk_150[i] != 0) {
+                this->unk_150[i]->actor.room = this->actor.room;
             }
         }
         constant += 20.0f;
     }
 }
-#else
-#pragma GLOBAL_ASM("asm/non_matchings/overlays/actors/ovl_Obj_Mure3/func_80B9AA90.s")
-#endif
 
 #if NON_MATCHING
 void func_80B9ABA0(ObjMure3 *this, GlobalContext *globalCtx) {
