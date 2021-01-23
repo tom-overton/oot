@@ -50,7 +50,7 @@ void func_80B9A9D0(ObjMure3 *this, GlobalContext *globalCtx) {
     s32 i;
     Vec3f spawnPos;
  
-    Math_Vec3f_Copy(&spawnPos, &this->actor.posRot.pos);
+    Math_Vec3f_Copy(&spawnPos, &this->actor.world.pos);
     for (i = 0; i < 5; i++) {
         if (((this->unk_16C >> i) & 1) == 0) {
             this->unk_150[i] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4001);
@@ -69,14 +69,14 @@ void func_80B9AA90(ObjMure3 *this, GlobalContext *globalCtx) {
     f32 cos;
     f32 constant;
 
-    sn = Math_SinS(this->actor.posRot.rot.y);
-    cos = Math_CosS(this->actor.posRot.rot.y);
-    spawnPos.y = this->actor.posRot.pos.y;
+    sn = Math_SinS(this->actor.world.rot.y);
+    cos = Math_CosS(this->actor.world.rot.y);
+    spawnPos.y = this->actor.world.pos.y;
     constant = -40.0f;
     for (i = 0; i < 5; i++) {
         if (((this->unk_16C >> i) & 1) == 0) {
-            spawnPos.x = this->actor.posRot.pos.x + (sn * constant);
-            spawnPos.z = this->actor.posRot.pos.z + (cos * constant);
+            spawnPos.x = this->actor.world.pos.x + (sn * constant);
+            spawnPos.z = this->actor.world.pos.z + (cos * constant);
             this->unk_150[i] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4000);
             if (this->unk_150[i] != 0) {
                 this->unk_150[i]->actor.room = this->actor.room;
@@ -91,12 +91,12 @@ void func_80B9ABA0(ObjMure3 *this, GlobalContext *globalCtx) {
     Vec3f spawnPos;
     s16 yRot;
 
-    spawnPos.y = this->actor.posRot.pos.y;
-    yRot = this->actor.posRot.rot.y;
+    spawnPos.y = this->actor.world.pos.y;
+    yRot = this->actor.world.rot.y;
     for (i = 0; i < 6; i++) {
         if (((this->unk_16C >> i) & 1) == 0) {
-            spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.posRot.pos.x;
-            spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.posRot.pos.z;
+            spawnPos.x = (Math_SinS(yRot) * 40.0f) + this->actor.world.pos.x;
+            spawnPos.z = (Math_CosS(yRot) * 40.0f) + this->actor.world.pos.z;
             this->unk_150[i] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4000);
             if (this->unk_150[i] != 0) {
                 this->unk_150[i]->actor.room = this->actor.room;
@@ -105,8 +105,8 @@ void func_80B9ABA0(ObjMure3 *this, GlobalContext *globalCtx) {
         yRot += 0x2AAA;
     }
     if (((this->unk_16C >> 6) & 1) == 0) {
-        spawnPos.x = this->actor.posRot.pos.x;
-        spawnPos.z = this->actor.posRot.pos.z;
+        spawnPos.x = this->actor.world.pos.x;
+        spawnPos.z = this->actor.world.pos.z;
         this->unk_150[6] = Item_DropCollectible2(globalCtx, &spawnPos, 0x4002);
         if (this->unk_150[6] != 0) {
             this->unk_150[6]->actor.room = this->actor.room;
