@@ -161,7 +161,7 @@ void Nejiron_UndergroundIdle(Nejiron* this, GlobalContext* globalCtx) {
     this->action = NEJIRON_ACTION_INACTIVE;
     if (this->actor.xzDistToPlayer < 200.0f) {
         this->actor.draw = Nejiron_DrawBody;
-        Audio_PlayActorSound2(&this->actor, NA_SE_EN_GANON_BREATH);
+        Audio_PlayActorSound2(&this->actor, NA_SE_EN_RIVA_APPEAR);
         this->actor.world.rot.z = 0;
         this->actor.world.rot.x = this->actor.world.rot.z;
         this->actor.flags &= ~ACTOR_FLAG_27;
@@ -207,7 +207,7 @@ void Nejiron_Idle(Nejiron* this, GlobalContext* globalCtx) {
                 if ((globalCtx->gameplayFrames % 8) == 0) {
                     Actor_SpawnFloorDustRing(globalCtx, &this->actor, &this->actor.world.pos,
                                   this->actor.shape.shadowScale - 20.0f, 10, 8.0f, 500, 10, 1);
-                    Audio_PlayActorSound2(&this->actor, NA_SE_EN_GANON_LAUGH);
+                    Audio_PlayActorSound2(&this->actor, NA_SE_EN_REDEAD_ATTACK);
                 }
             }
         }
@@ -251,8 +251,7 @@ void Nejiron_Roll(Nejiron* this, GlobalContext* globalCtx) {
         return;
     }
 
-    // @bug this doesn't work
-    if (!this->hardHitFlag && this->collider.base.atFlags & AC_HARD) {
+    if (!this->hardHitFlag && this->collider.base.atFlags & AT_BOUNCED) {
         this->zRollDirection ^= 1;
         this->hardHitFlag = 1;
         this->actor.speedXZ = -7.0f;
@@ -269,7 +268,7 @@ void Nejiron_Roll(Nejiron* this, GlobalContext* globalCtx) {
             this->actor.world.rot.z -= (s16)this->currentRotation.z;
         }
     }
-    Audio_PlayActorSound2(&this->actor, NA_SE_EN_GANON_THROW - SFX_FLAG);
+    Audio_PlayActorSound2(&this->actor, NA_SE_EV_BIGBALL_ROLL - SFX_FLAG);
 }
 
 void Nejiron_SetupRetreatUnderground(Nejiron* this) {
@@ -291,7 +290,7 @@ void Nejiron_RetreatUnderground(Nejiron* this, GlobalContext* globalCtx) {
         this->actor.shape.yOffset = -3000.0f;
         this->actor.draw = Nejiron_DrawBody;
         Math_Vec3f_Copy(&this->actor.world.pos, &this->actor.home.pos);
-        Audio_PlayActorSound2(&this->actor, NA_SE_EN_GANON_BREATH);
+        Audio_PlayActorSound2(&this->actor, NA_SE_EN_AKINDONUTS_HIDE);
         this->actor.flags |= ACTOR_FLAG_27;
         this->actor.flags &= ~(ACTOR_FLAG_0 | ACTOR_FLAG_2);
         this->actionFunc = Nejiron_UndergroundIdle;
@@ -356,7 +355,6 @@ void Nejiron_CheckForDetonation(Nejiron* this, GlobalContext* globalCtx) {
                     EffectSsBlast_SpawnWhiteShockwave(globalCtx, &effPos, &effVelocity, &effAccel);
                 }
                 Audio_PlayActorSound2(&this->actor, NA_SE_IT_BOMB_EXPLOSION);
-                Audio_PlayActorSound2(&this->actor, NA_SE_EN_GANON_DEAD);
                 this->timer = 30;
                 this->actor.flags |= ACTOR_FLAG_27;
                 this->actor.flags &= ~(ACTOR_FLAG_0 | ACTOR_FLAG_2);
@@ -404,7 +402,7 @@ void Nejiron_Update(Actor* thisx, GlobalContext* globalCtx) {
                 this->blinkTimer = Rand_ZeroFloat(60.0f) + 20.0f;
             }
         }
-        func_8002D868(&this->actor);
+        Actor_MoveForward(&this->actor);
         Actor_UpdateBgCheckInfo(globalCtx, &this->actor, 20.0f, 20.0f, 60.0f, 0x1D);
         if (this->action != NEJIRON_ACTION_INACTIVE) {
             CollisionCheck_SetAC(globalCtx, &globalCtx->colChkCtx, &this->collider.base);
