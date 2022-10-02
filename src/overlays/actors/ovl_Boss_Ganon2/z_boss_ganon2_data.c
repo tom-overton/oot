@@ -17,7 +17,7 @@ typedef struct {
     /* 0x38 */ Vec3f unk_38;
 } BossGanon2Effect; // size = 0x44
 
-static Vec3f D_80906D60 = { 0.0f, 0.0f, 0.0f };
+static Vec3f sZeroVec = { 0.0f, 0.0f, 0.0f };
 
 static Vec3f D_80906D6C = { 0.0f, 0.0f, 500.0f };
 
@@ -271,7 +271,7 @@ static Vec3f D_80907050[] = {
 
 static s16 D_80907074[] = { 0, 1, 2, 2, 1, 0 };
 
-static s16 D_80907080 = 0;
+static s16 sSwordTrailAlpha = 0;
 
 static u8 D_80907084[] = { 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20 };
 
@@ -299,7 +299,7 @@ static Vec3f D_80907120 = { 0.0f, 0.0f, 17000.0f };
 
 static Vec3f D_8090712C = { 0.0f, 0.0f, 3000.0f };
 
-static Vec3f D_80907138 = { 0.0f, 0.0f, 0.0f };
+static Vec3f sTailZeroVec = { 0.0f, 0.0f, 0.0f };
 
 static s8 D_80907144[] = {
     0xFF, 0xFF, 0x01, 0xFF, 0x03, 0x04, 0x05, 0xFF, 0x06, 0x07, 0x08, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -337,7 +337,7 @@ static Vec3f D_8090EB20;
 
 static EnZl3* sZelda;
 
-static Actor* D_8090EB30;
+static Actor* sNavi;
 
 // unused
 static UNK_TYPE D_8090EB34;

@@ -1178,7 +1178,7 @@ void func_80B55F6C(EnZl3* this, PlayState* play) {
     } else if (ABS((s16)(this->actor.yawTowardsPlayer - this->actor.shape.rot.y)) <= 0x4300) {
         BossGanon2* bossGanon2 = func_80B53488(this, play);
 
-        if ((bossGanon2 != NULL) && (bossGanon2->unk_324 <= (10.0f / 81.0f))) {
+        if ((bossGanon2 != NULL) && (bossGanon2->fireRingAlpha <= (10.0f / 81.0f))) {
             this->actor.flags |= ACTOR_FLAG_0 | ACTOR_FLAG_3;
             this->actor.flags |= ACTOR_FLAG_0;
             this->actor.textId = 0x7059;
@@ -1240,7 +1240,7 @@ void func_80B56214(EnZl3* this, PlayState* play) {
         BossGanon2* bossGanon2 = func_80B53488(this, play);
 
         if (bossGanon2 != NULL) {
-            if (bossGanon2->unk_324 <= (10.0f / 81.0f)) {
+            if (bossGanon2->fireRingAlpha <= (10.0f / 81.0f)) {
                 this->actor.flags |= ACTOR_FLAG_0 | ACTOR_FLAG_3;
                 this->actor.flags |= ACTOR_FLAG_0;
                 this->actor.textId = 0x7059;
